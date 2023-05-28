@@ -1,0 +1,56 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+<!--    <changeSet id="1" author="yourname">-->
+<!--        <sql>-->
+<!--            CREATE-->
+<!--            DATABASE firstdb;-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+
+    <changeSet id="2" author="yourname">
+        <sql>CREATE TABLE firstDB.specialties
+             (
+                 id   INT AUTO_INCREMENT PRIMARY KEY,
+                 name VARCHAR(50) NOT NULL
+             );</sql>
+    </changeSet>
+
+    <changeSet id="3" author="yourname">
+        <sql>
+            CREATE TABLE firstDB.developers
+            (
+                id           INT AUTO_INCREMENT PRIMARY KEY,
+                first_name   VARCHAR(50) NOT NULL,
+                last_name    VARCHAR(50) NOT NULL,
+                specialty    VARCHAR(50) NOT NULL,
+                status       ENUM ('ACTIVE', 'DELETED') NOT NULL DEFAULT 'ACTIVE',
+                specialty_id INT         REFERENCES firstDB.specialties (id) ON DELETE SET NULL
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="4" author="yourname">
+        <sql>CREATE TABLE firstDB.skills
+             (
+                 id   INT AUTO_INCREMENT PRIMARY KEY,
+                 name VARCHAR(50) NOT NULL
+             );</sql>
+    </changeSet>
+
+    <changeSet id="5" author="yourname">
+        <sql> CREATE TABLE firstDB.developer_skills
+              (
+                  developers_id
+                            INT REFERENCES developers (id),
+                  skills_id INT REFERENCES skills (id),
+                  CONSTRAINT developers_skills PRIMARY KEY (developers_id, skills_id)
+              );</sql>
+    </changeSet>
+
+
+
+</databaseChangeLog>
