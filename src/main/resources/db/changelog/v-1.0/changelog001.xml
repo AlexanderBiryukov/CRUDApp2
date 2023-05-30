@@ -4,19 +4,9 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <preConditions>
-        <dbms type="mysql"/>
-    </preConditions>
-
-    <changeSet id="0" author="name">
-        <tagDatabase tag="db_init"/>
-    </changeSet>
-
-    <include file="v-1.0/changelog001.xml" relativeToChangelogFile="true"/>
-
-    <changeSet id="5" author="name">
-        <tagDatabase tag="v.1.0"/>
-    </changeSet>
-
+    <include file="01-changeset-specialties-table.xml" relativeToChangelogFile="true"/>
+    <include file="01-changeset-developers-table.xml" relativeToChangelogFile="true"/>
+    <include file="01-changeset-skills-table.xml" relativeToChangelogFile="true"/>
+    <include file="01-changeset-developers_skills.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

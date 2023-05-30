@@ -7,7 +7,11 @@ import com.alexb.crudapp2.repository.jdbc.JdbcSkillRepositoryImpl;
 import java.util.List;
 
 public class SkillService {
-    private final SkillRepository skillRepository = new JdbcSkillRepositoryImpl();
+    SkillRepository skillRepository;
+
+    public SkillService() {
+        this.skillRepository = new JdbcSkillRepositoryImpl();
+    }
 
     public List<Skill> getAllSkills() {
         return skillRepository.getAll();

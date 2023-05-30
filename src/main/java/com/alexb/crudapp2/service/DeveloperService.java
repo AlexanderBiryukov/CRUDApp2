@@ -7,7 +7,11 @@ import com.alexb.crudapp2.repository.jdbc.JdbcDeveloperRepositoryImpl;
 import java.util.List;
 
 public class DeveloperService {
-    public final DeveloperRepository developerRepository = new JdbcDeveloperRepositoryImpl();
+    DeveloperRepository developerRepository;
+
+    public DeveloperService() {
+        this.developerRepository = new JdbcDeveloperRepositoryImpl();
+    }
 
     public List<Developer> getAllDevelopers() {
         return developerRepository.getAll();
