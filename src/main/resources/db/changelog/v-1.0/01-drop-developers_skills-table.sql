@@ -1,1 +1,1 @@
-drop table developer_skills;
+drop table developers_skills;

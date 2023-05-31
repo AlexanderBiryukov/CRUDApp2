@@ -1,4 +1,4 @@
-CREATE TABLE developer_skills
+CREATE TABLE developers_skills
 (
     developers_id
               INT REFERENCES developers (id),
