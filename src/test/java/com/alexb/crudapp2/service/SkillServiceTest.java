@@ -1,6 +1,6 @@
 package com.alexb.crudapp2.service;
 
-import com.alexb.crudapp2.model.Skill;
+import com.alexb.crudapp2.entity.SkillEntity;
 import com.alexb.crudapp2.repository.SkillRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,10 +22,10 @@ public class SkillServiceTest {
 
     @Test
     public void createSkillTest() {
-        Skill skill = new Skill("Java");
+        SkillEntity skill = new SkillEntity("Java");
         Mockito.when(skillRepository.save(skill)).thenReturn(skill);
 
-        Skill skillFromDB = skillService.creationSkill(skill);
+        SkillEntity skillFromDB = skillService.creationSkill(skill);
         Assertions.assertNotNull(skillFromDB);
         Assertions.assertEquals(skill, skillFromDB);
         Mockito.verify(skillRepository, Mockito.times(1)).save(skill);
@@ -33,13 +33,13 @@ public class SkillServiceTest {
 
     @Test
     public void readSkillTest() {
-        List<Skill> skillList = new ArrayList<>();
-        skillList.add(new Skill("Java"));
-        skillList.add(new Skill("Spring"));
+        List<SkillEntity> skillList = new ArrayList<>();
+        skillList.add(new SkillEntity("Java"));
+        skillList.add(new SkillEntity("Spring"));
 
         Mockito.when(skillRepository.getAll()).thenReturn(skillList);
 
-        List<Skill> skillsFromDB = skillService.getAllSkills();
+        List<SkillEntity> skillsFromDB = skillService.getAllSkills();
 
         Assertions.assertEquals(skillList, skillsFromDB);
         Mockito.verify(skillRepository, Mockito.times(1)).getAll();
@@ -47,11 +47,11 @@ public class SkillServiceTest {
 
     @Test
     public void updateSkillTest() {
-        Skill skill = new Skill("Java");
+        SkillEntity skill = new SkillEntity("Java");
 
         Mockito.when(skillRepository.update(skill)).thenReturn(skill);
 
-        Skill skillFromDB = skillService.editSkill(skill);
+        SkillEntity skillFromDB = skillService.editSkill(skill);
 
         Assertions.assertNotNull(skillFromDB);
         Assertions.assertEquals(skill, skillFromDB);

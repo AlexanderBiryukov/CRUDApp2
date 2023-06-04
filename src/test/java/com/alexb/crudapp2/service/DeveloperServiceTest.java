@@ -1,9 +1,9 @@
 package com.alexb.crudapp2.service;
 
-import com.alexb.crudapp2.model.Developer;
-import com.alexb.crudapp2.model.Skill;
-import com.alexb.crudapp2.model.Specialty;
-import com.alexb.crudapp2.model.Status;
+import com.alexb.crudapp2.entity.DeveloperEntity;
+import com.alexb.crudapp2.entity.SkillEntity;
+import com.alexb.crudapp2.entity.SpecialtyEntity;
+import com.alexb.crudapp2.entity.Status;
 import com.alexb.crudapp2.repository.DeveloperRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,6 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
+
 @ExtendWith(MockitoExtension.class)
 public class DeveloperServiceTest {
     @Mock
@@ -23,38 +25,38 @@ public class DeveloperServiceTest {
     @InjectMocks
     DeveloperService developerService;
 
+    private DeveloperEntity getDeveloper() {
+        List<SkillEntity> skillList = new ArrayList<>();
+        skillList.add(new SkillEntity("Java"));
+        skillList.add(new SkillEntity("Spring"));
+        return new DeveloperEntity(
+                "Ivan", "Ivanov", skillList, new SpecialtyEntity("Backend developer"), Status.ACTIVE);
+    }
+
     @Test
     public void createDeveloperTest() {
-        List<Skill> skillList = new ArrayList<>();
-        skillList.add(new Skill("Java"));
-        skillList.add(new Skill("Spring"));
-        Developer developer = new Developer(
-                "Ivan", "Ivanov", skillList, new Specialty("Backend developer"), Status.ACTIVE);
-
-        Mockito.when(developerRepository.save(developer)).thenReturn(developer);
-
-        Developer developerFromDB = developerService.creationDev(developer);
-
+        Mockito.when(developerRepository.save(any())).thenReturn(getDeveloper());
+        DeveloperEntity developerFromDB = developerService.creationDev(getDeveloper());
         Assertions.assertNotNull(developerFromDB);
-        Assertions.assertEquals(developer, developerFromDB);
-        Mockito.verify(developerRepository, Mockito.times(1)).save(developer);
+        Assertions.assertEquals(getDeveloper(), developerFromDB);
+        Mockito.verify(developerRepository, Mockito.times(1)).save(any());
     }
 
     @Test
     public void readDeveloperTest() {
-        List<Skill> skillList = new ArrayList<>();
-        skillList.add(new Skill("Java"));
-        skillList.add(new Skill("Spring"));
-        Developer developer = new Developer(
-                "Ivan", "Ivanov", skillList, new Specialty("Backend developer"), Status.ACTIVE);
+        List<SkillEntity> skillList = new ArrayList<>();
+        skillList.add(new SkillEntity("Java"));
+        skillList.add(new SkillEntity("Spring"));
+        DeveloperEntity developer = new DeveloperEntity(
+                "Ivan", "Ivanov", skillList, new SpecialtyEntity("Backend developer"), Status.ACTIVE);
 
-        List<Developer> developerList = new ArrayList<>();
+        List<DeveloperEntity> developerList = new ArrayList<>();
         developerList.add(developer);
         developerList.add(developer);
 
         Mockito.when(developerRepository.getAll()).thenReturn(developerList);
 
-        List<Developer> developersFromDB = developerService.getAllDevelopers();
+        List<DeveloperEntity> developersFromDB = developerService.getAllDevelopers();
 
         Assertions.assertEquals(developerList, developersFromDB);
         Mockito.verify(developerRepository, Mockito.times(1)).getAll();
@@ -62,15 +64,15 @@ public class DeveloperServiceTest {
 
     @Test
     public void updateDeveloperTest() {
-        List<Skill> skillList = new ArrayList<>();
-        skillList.add(new Skill("Java"));
-        skillList.add(new Skill("Spring"));
-        Developer developer = new Developer(
-                "Ivan", "Ivanov", skillList, new Specialty("Backend developer"), Status.ACTIVE);
+        List<SkillEntity> skillList = new ArrayList<>();
+        skillList.add(new SkillEntity("Java"));
+        skillList.add(new SkillEntity("Spring"));
+        DeveloperEntity developer = new DeveloperEntity(
+                "Ivan", "Ivanov", skillList, new SpecialtyEntity("Backend developer"), Status.ACTIVE);
 
         Mockito.when(developerRepository.update(developer)).thenReturn(developer);
 
-        Developer developerFromDB = developerService.editDev(developer);
+        DeveloperEntity developerFromDB = developerService.editDev(developer);
 
         Assertions.assertEquals(developer, developerFromDB);
         Assertions.assertNotNull(developerFromDB);

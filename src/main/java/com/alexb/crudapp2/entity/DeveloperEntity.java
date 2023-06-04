@@ -1,20 +1,20 @@
-package com.alexb.crudapp2.model;
+package com.alexb.crudapp2.entity;
 
 import java.util.List;
 import java.util.Objects;
 
-public class Developer {
+public class DeveloperEntity {
     private long id;
     private String firstName;
     private String lastName;
-    private List<Skill> skills;
-    private Specialty specialty;
+    private List<SkillEntity> skills;
+    private SpecialtyEntity specialty;
     private Status status;
 
-    public Developer() {
+    public DeveloperEntity() {
     }
 
-    public Developer(String firstName, String lastName, List<Skill> skills, Specialty specialty, Status status) {
+    public DeveloperEntity(String firstName, String lastName, List<SkillEntity> skills, SpecialtyEntity specialty, Status status) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.skills = skills;
@@ -46,19 +46,19 @@ public class Developer {
         this.lastName = lastName;
     }
 
-    public List<Skill> getSkills() {
+    public List<SkillEntity> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<Skill> skills) {
+    public void setSkills(List<SkillEntity> skills) {
         this.skills = skills;
     }
 
-    public Specialty getSpecialty() {
+    public SpecialtyEntity getSpecialty() {
         return specialty;
     }
 
-    public void setSpecialty(Specialty specialty) {
+    public void setSpecialty(SpecialtyEntity specialty) {
         this.specialty = specialty;
     }
 
@@ -81,7 +81,7 @@ public class Developer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Developer developer = (Developer) o;
+        DeveloperEntity developer = (DeveloperEntity) o;
         return id == developer.id && Objects.equals(firstName, developer.firstName) && Objects.equals(lastName, developer.lastName) && Objects.equals(skills, developer.skills) && Objects.equals(specialty, developer.specialty) && status == developer.status;
     }
 

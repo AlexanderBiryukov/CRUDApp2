@@ -1,22 +1,23 @@
-package com.alexb.crudapp2.model;
+package com.alexb.crudapp2.entity;
 
 import java.util.Objects;
 
-public class Skill {
-    private String name;
+public class SkillEntity {
     private long id;
+    private String name;
 
-    public Skill() {
+    public SkillEntity() {
     }
 
-    public Skill(String name, long id) {
-        this.name = name;
+    public SkillEntity(long id, String name) {
         this.id = id;
-    }
-
-    public Skill(String name) {
         this.name = name;
     }
+
+    public SkillEntity(String name) {
+        this.name = name;
+    }
+
 
     public String getName() {
         return name;
@@ -43,7 +44,7 @@ public class Skill {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Skill skill = (Skill) o;
+        SkillEntity skill = (SkillEntity) o;
         return id == skill.id && Objects.equals(name, skill.name);
     }
 

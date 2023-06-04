@@ -1,10 +1,10 @@
 package com.alexb.crudapp2.views;
 
 import com.alexb.crudapp2.controller.DeveloperController;
-import com.alexb.crudapp2.model.Developer;
-import com.alexb.crudapp2.model.Skill;
-import com.alexb.crudapp2.model.Specialty;
-import com.alexb.crudapp2.model.Status;
+import com.alexb.crudapp2.entity.DeveloperEntity;
+import com.alexb.crudapp2.entity.SkillEntity;
+import com.alexb.crudapp2.entity.SpecialtyEntity;
+import com.alexb.crudapp2.entity.Status;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +18,7 @@ public class DeveloperView {
     private final SkillView skillView = new SkillView();
 
     public void showToDevelopers() {
-        List<Developer> listDeveloper = developerController.getListAllDevelopers();
+        List<DeveloperEntity> listDeveloper = developerController.getListAllDevelopers();
         if (listDeveloper.isEmpty()) {
             System.out.println("\nNone developers\n");
         } else {
@@ -36,16 +36,16 @@ public class DeveloperView {
         System.out.println("Enter last name: ");
         String ln = scanner.nextLine().trim();
 
-        Specialty specialty = setSpecialty();
-        List<Skill> skills = setSkills();
+        SpecialtyEntity specialty = setSpecialty();
+        List<SkillEntity> skills = setSkills();
 
         System.out.println("\nDeveloper created: ");
         System.out.println(developerController.createDeveloper(fn, ln, skills, specialty));
     }
 
     public void editDeveloper() {
-        List<Developer> developerList = developerController.getListAllDevelopers();
-        Developer developer = new Developer();
+        List<DeveloperEntity> developerList = developerController.getListAllDevelopers();
+        DeveloperEntity developer;
         if (developerList.isEmpty()) {
             System.out.println("List of developers is empty");
         } else {
@@ -60,8 +60,8 @@ public class DeveloperView {
             System.out.println("Enter new last name: ");
             String newLn = scanner.nextLine().trim();
 
-            Specialty specialty = setSpecialty();
-            List<Skill> skills = setSkills();
+            SpecialtyEntity specialty = setSpecialty();
+            List<SkillEntity> skills = setSkills();
             System.out.println("Developer updated: ");
             System.out.println(developerController
                     .updateDeveloper(developer.getId(), newFn, newLn, skills, specialty));
@@ -81,9 +81,9 @@ public class DeveloperView {
     }
 
 
-    public List<Skill> setSkills() {
+    public List<SkillEntity> setSkills() {
         String[] arrayId;
-        List<Skill> skillList = skillView.outAllSkills();
+        List<SkillEntity> skillList = skillView.outAllSkills();
         if (skillList.isEmpty()) {
             skillList = null;
         } else {
@@ -105,10 +105,10 @@ public class DeveloperView {
         return skillList;
     }
 
-    public Specialty setSpecialty() {
+    public SpecialtyEntity setSpecialty() {
         long id;
-        Specialty specialty = new Specialty();
-        List<Specialty> specialtyList = specialtyView.outAllSpecialties();
+        SpecialtyEntity specialty;
+        List<SpecialtyEntity> specialtyList = specialtyView.outAllSpecialties();
         if (specialtyList.isEmpty()) {
             specialty = null;
         } else {

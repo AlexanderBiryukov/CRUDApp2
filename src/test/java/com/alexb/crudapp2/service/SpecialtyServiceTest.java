@@ -1,6 +1,6 @@
 package com.alexb.crudapp2.service;
 
-import com.alexb.crudapp2.model.Specialty;
+import com.alexb.crudapp2.entity.SpecialtyEntity;
 import com.alexb.crudapp2.repository.SpecialtyRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,10 +22,10 @@ public class SpecialtyServiceTest {
 
     @Test
     public void createSpecialtyTest() {
-        Specialty specialty = new Specialty("Backend developer");
+        SpecialtyEntity specialty = new SpecialtyEntity("Backend developer");
         Mockito.when(specialtyRepository.save(specialty)).thenReturn(specialty);
 
-        Specialty specialtyFromDB = specialtyService.creationSpecialty(specialty);
+        SpecialtyEntity specialtyFromDB = specialtyService.creationSpecialty(specialty);
         Assertions.assertNotNull(specialtyFromDB);
         Assertions.assertEquals(specialty, specialtyFromDB);
         Mockito.verify(specialtyRepository, Mockito.times(1)).save(specialty);
@@ -33,13 +33,13 @@ public class SpecialtyServiceTest {
 
     @Test
     public void readSpecialtyTest() {
-        List<Specialty> specialtyList = new ArrayList<>();
-        specialtyList.add(new Specialty("Backend developer"));
-        specialtyList.add(new Specialty("DevOps"));
+        List<SpecialtyEntity> specialtyList = new ArrayList<>();
+        specialtyList.add(new SpecialtyEntity("Backend developer"));
+        specialtyList.add(new SpecialtyEntity("DevOps"));
 
         Mockito.when(specialtyRepository.getAll()).thenReturn(specialtyList);
 
-        List<Specialty> specialtiesFromDB = specialtyService.getAllSpecialties();
+        List<SpecialtyEntity> specialtiesFromDB = specialtyService.getAllSpecialties();
 
         Assertions.assertEquals(specialtyList, specialtiesFromDB);
         Mockito.verify(specialtyRepository, Mockito.times(1)).getAll();
@@ -47,11 +47,11 @@ public class SpecialtyServiceTest {
 
     @Test
     public void updateSpecialtyTest() {
-        Specialty specialty = new Specialty("Backend developer");
+        SpecialtyEntity specialty = new SpecialtyEntity("Backend developer");
 
         Mockito.when(specialtyRepository.update(specialty)).thenReturn(specialty);
 
-        Specialty specialtyFromDB = specialtyService.editSpecialty(specialty);
+        SpecialtyEntity specialtyFromDB = specialtyService.editSpecialty(specialty);
         Assertions.assertNotNull(specialtyFromDB);
         Assertions.assertEquals(specialty, specialtyFromDB);
         Mockito.verify(specialtyRepository, Mockito.times(1)).update(specialty);

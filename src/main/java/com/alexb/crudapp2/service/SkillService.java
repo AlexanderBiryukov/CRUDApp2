@@ -1,27 +1,31 @@
 package com.alexb.crudapp2.service;
 
-import com.alexb.crudapp2.model.Skill;
+import com.alexb.crudapp2.entity.SkillEntity;
 import com.alexb.crudapp2.repository.SkillRepository;
 import com.alexb.crudapp2.repository.jdbc.JdbcSkillRepositoryImpl;
 
 import java.util.List;
 
 public class SkillService {
-    SkillRepository skillRepository;
+    private final SkillRepository skillRepository;
 
     public SkillService() {
         this.skillRepository = new JdbcSkillRepositoryImpl();
     }
 
-    public List<Skill> getAllSkills() {
+    public SkillService(SkillRepository skillRepository) {
+        this.skillRepository = skillRepository;
+    }
+
+    public List<SkillEntity> getAllSkills() {
         return skillRepository.getAll();
     }
 
-    public Skill creationSkill(Skill skill) {
+    public SkillEntity creationSkill(SkillEntity skill) {
         return skillRepository.save(skill);
     }
 
-    public Skill editSkill(Skill skill) {
+    public SkillEntity editSkill(SkillEntity skill) {
         return skillRepository.update(skill);
     }
 

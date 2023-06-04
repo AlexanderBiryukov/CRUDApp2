@@ -1,6 +1,6 @@
 package com.alexb.crudapp2.repository;
 
-import com.alexb.crudapp2.model.Developer;
+import com.alexb.crudapp2.entity.DeveloperEntity;
 
-public interface DeveloperRepository extends GenericRepository<Developer, Long> {
+public interface DeveloperRepository extends GenericRepository<DeveloperEntity, Long> {
 }

@@ -1,9 +1,9 @@
 package com.alexb.crudapp2.controller;
 
-import com.alexb.crudapp2.model.Developer;
-import com.alexb.crudapp2.model.Skill;
-import com.alexb.crudapp2.model.Specialty;
-import com.alexb.crudapp2.model.Status;
+import com.alexb.crudapp2.entity.DeveloperEntity;
+import com.alexb.crudapp2.entity.SkillEntity;
+import com.alexb.crudapp2.entity.SpecialtyEntity;
+import com.alexb.crudapp2.entity.Status;
 import com.alexb.crudapp2.service.DeveloperService;
 
 import java.util.List;
@@ -11,12 +11,12 @@ import java.util.List;
 public class DeveloperController {
     private final DeveloperService developerService = new DeveloperService();
 
-    public List<Developer> getListAllDevelopers() {
+    public List<DeveloperEntity> getListAllDevelopers() {
         return developerService.getAllDevelopers();
     }
 
-    public Developer createDeveloper(String firstName, String lastName, List<Skill> skills, Specialty specialty) {
-        Developer developer = new Developer();
+    public DeveloperEntity createDeveloper(String firstName, String lastName, List<SkillEntity> skills, SpecialtyEntity specialty) {
+        DeveloperEntity developer = new DeveloperEntity();
         developer.setFirstName(firstName);
         developer.setLastName(lastName);
         developer.setSkills(skills);
@@ -26,12 +26,12 @@ public class DeveloperController {
 
     }
 
-    public Developer getDevelopersById(Long id) {
+    public DeveloperEntity getDevelopersById(Long id) {
         return developerService.getDevById(id);
     }
 
-    public Developer updateDeveloper(long id, String firstName, String lastName, List<Skill> skills, Specialty specialty) {
-        Developer developer = new Developer(firstName, lastName, skills, specialty, Status.ACTIVE);
+    public DeveloperEntity updateDeveloper(long id, String firstName, String lastName, List<SkillEntity> skills, SpecialtyEntity specialty) {
+        DeveloperEntity developer = new DeveloperEntity(firstName, lastName, skills, specialty, Status.ACTIVE);
         developer.setId(id);
         return developerService.editDev(developer);
     }

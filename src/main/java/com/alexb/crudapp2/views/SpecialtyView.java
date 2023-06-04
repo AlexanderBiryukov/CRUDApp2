@@ -1,7 +1,7 @@
 package com.alexb.crudapp2.views;
 
 import com.alexb.crudapp2.controller.SpecialtyController;
-import com.alexb.crudapp2.model.Specialty;
+import com.alexb.crudapp2.entity.SpecialtyEntity;
 
 import java.util.List;
 import java.util.Scanner;
@@ -11,12 +11,12 @@ public class SpecialtyView {
     private final SpecialtyController specialtyController = new SpecialtyController();
 
 
-    public List<Specialty> outAllSpecialties() {
+    public List<SpecialtyEntity> outAllSpecialties() {
         return specialtyController.getListAllSpecialties();
     }
 
     public void showToSpecialties() {
-        List<Specialty> specialtyList = specialtyController.getListAllSpecialties();
+        List<SpecialtyEntity> specialtyList = specialtyController.getListAllSpecialties();
         if (specialtyList.isEmpty()) {
             System.out.println("\nNone specialties\n");
         } else {
@@ -33,7 +33,7 @@ public class SpecialtyView {
     public void editSpecialty() {
         String newName;
         long id;
-        List<Specialty> specialtyList = specialtyController.getListAllSpecialties();
+        List<SpecialtyEntity> specialtyList = specialtyController.getListAllSpecialties();
         if (specialtyList.isEmpty()) {
             System.out.println("List of specialties is empty");
         } else {
@@ -50,13 +50,15 @@ public class SpecialtyView {
 
     public void deleteSpecialty() {
         long id;
-        List<Specialty> specialtyList = specialtyController.getListAllSpecialties();
+        List<SpecialtyEntity> specialtyList = specialtyController.getListAllSpecialties();
         if (specialtyList.isEmpty()) {
             System.out.println("List of specialties is empty");
         } else {
             showToSpecialties();
-            System.out.println("\nSelect a specialty to delete from the list" +
-                    "(Enter a ordinal number): \n");
+            System.out.println("""
+
+                    Select a specialty to delete from the list(Enter a ordinal number):\s
+                    """);
             id = Long.parseLong(scanner.nextLine().trim());
             specialtyController.deleteSpecialtyById(id);
             System.out.println("Specialty deleted");

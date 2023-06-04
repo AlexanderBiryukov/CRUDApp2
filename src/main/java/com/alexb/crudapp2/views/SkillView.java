@@ -1,7 +1,7 @@
 package com.alexb.crudapp2.views;
 
 import com.alexb.crudapp2.controller.SkillController;
-import com.alexb.crudapp2.model.Skill;
+import com.alexb.crudapp2.entity.SkillEntity;
 
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +13,7 @@ public class SkillView {
 
     //
     public void showToSkills() {
-        List<Skill> skillList = skillController.getListAllSkills();
+        List<SkillEntity> skillList = skillController.getListAllSkills();
         if (skillList.isEmpty()) {
             System.out.println("\nNone skills\n");
         } else {
@@ -22,7 +22,7 @@ public class SkillView {
     }
 
     //
-    public List<Skill> outAllSkills() {
+    public List<SkillEntity> outAllSkills() {
         return skillController.getListAllSkills();
     }
 
@@ -36,7 +36,7 @@ public class SkillView {
     public void editSkill() {
         String newName;
         long id;
-        List<Skill> skillList = skillController.getListAllSkills();
+        List<SkillEntity> skillList = skillController.getListAllSkills();
         if (skillList.isEmpty()) {
             System.out.println("List of skills is empty");
         } else {
@@ -53,13 +53,15 @@ public class SkillView {
 //
     public void deleteSkill() {
         long id;
-        List<Skill> skillList = skillController.getListAllSkills();
+        List<SkillEntity> skillList = skillController.getListAllSkills();
         if (skillList.isEmpty()) {
             System.out.println("List of skills is empty");
         } else {
             showToSkills();
-            System.out.println("\nSelect a skill to delete from the list" +
-                    "(Enter a ordinal number): \n");
+            System.out.println("""
+
+                    Select a skill to delete from the list(Enter a ordinal number):\s
+                    """);
             id = Long.parseLong(scanner.nextLine().trim());
             skillController.deleteSkillById(id);
             System.out.println("Skill deleted!");
